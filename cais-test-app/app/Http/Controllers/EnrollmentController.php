@@ -13,13 +13,60 @@ class EnrollmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        try {    
-            $enrollments = Enrollment::with(['user', 'course', 'semester'])->get();
+        try {
+            $query = Enrollment::with(['user', 'course', 'semester', 'classSchedule', 'preregistration']);
 
-            return EnrollmentResources::collection($enrollments);
+            // Filter by user_id if provided
+            if ($request->has('user_id')) {
+                $query->where('user_id', $request->user_id);
+            }
+
+            // Filter by semester_id if provided
+            if ($request->has('semester_id')) {
+                $query->where('semester_id', $request->semester_id);
+            }
+
+            // Filter by approval_status if provided
+            if ($request->has('approval_status')) {
+                $query->where('approval_status', $request->approval_status);
+            }
+
+            $enrollments = $query->orderBy('created_at', 'desc')->get();
+
+            // Format response with class schedule details
+            $formattedEnrollments = $enrollments->map(function($enrollment) {
+                $classSched = $enrollment->classSchedule;
+                $prereg = $enrollment->preregistration;
+                
+                return [
+                    'enrollment_id' => $enrollment->enrollment_id,
+                    'user_id' => $enrollment->user_id,
+                    'semester_id' => $enrollment->semester_id,
+                    'course_id' => $enrollment->course_id,
+                    'section' => $enrollment->section,
+                    'prereg_id' => $enrollment->prereg_id,
+                    'schedId' => $enrollment->schedId,
+                    'subject_code' => $classSched?->subject_code ?? $prereg?->subject_code ?? 'N/A',
+                    'subject_title' => $classSched?->subject_title ?? $prereg?->subject_title ?? 'N/A',
+                    'units' => $classSched?->units ?? $prereg?->units ?? 0,
+                    'approval_status' => $enrollment->approval_status,
+                    'remarks' => $enrollment->remarks,
+                    'approved_by' => $enrollment->approved_by,
+                    'approved_at' => $enrollment->approved_at,
+                    'created_at' => $enrollment->created_at,
+                ];
+            });
+
+            return response()->json([
+                'success' => true,
+                'data' => $formattedEnrollments,
+                'count' => $formattedEnrollments->count()
+            ], 200);
+            
         } catch (\Exception $e) {
+            \Log::error('Failed to retrieve enrollments: ' . $e->getMessage());
             return response()->json(['error' => 'Failed to retrieve enrollments', 'message' => $e->getMessage()], 500);
         }
     }
@@ -175,6 +222,44 @@ class EnrollmentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $enrollment = Enrollment::findOrFail($id);
+
+            // Only allow cancellation if approval_status is 'pending'
+            if ($enrollment->approval_status === 'approved') {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Cannot cancel an approved enrollment'
+                ], 400);
+            }
+
+            // If this enrollment came from preregistration, update the preregistration status back to pending
+            if ($enrollment->prereg_id) {
+                $preregistration = \App\Models\Preregistration::find($enrollment->prereg_id);
+                if ($preregistration) {
+                    $preregistration->update(['status' => 'pending']);
+                }
+            }
+
+            $enrollment->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Enrollment cancelled successfully'
+            ], 200);
+
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Enrollment not found'
+            ], 404);
+        } catch (\Exception $e) {
+            \Log::error('Error cancelling enrollment: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Error cancelling enrollment',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }

@@ -130,6 +130,129 @@ class RegistrationController extends Controller
     }
 
     /**
+     * Get public subjects schedule (no auth required) - for real-time schedule display
+     */
+    public function getPublicSubjectsSchedule(Request $request)
+    {
+        try {
+            $search = $request->search;
+            $perPage = $request->per_page ?? 10;
+
+            \Log::info("Fetching public subjects schedule, search: {$search}");
+
+            // Get semester - prefer active semester, but fallback to semester with subjects
+            $activeSemester = Semester::where('semester_status', 'active')
+                                ->orderBy('semester_id', 'desc')
+                                ->first();
+
+            // If active semester has no subjects, find the semester that has subjects
+            if ($activeSemester) {
+                $hasSubjects = DB::table('tbl_class_schedules')
+                    ->where('semester_id', $activeSemester->semester_id)
+                    ->exists();
+                
+                if (!$hasSubjects) {
+                    // Find the semester that actually has subjects
+                    $semesterWithSubjects = DB::table('tbl_class_schedules')
+                        ->select('semester_id')
+                        ->groupBy('semester_id')
+                        ->orderBy('semester_id', 'desc')
+                        ->first();
+                    
+                    if ($semesterWithSubjects) {
+                        $activeSemester = Semester::find($semesterWithSubjects->semester_id);
+                    }
+                }
+            } else {
+                // No active semester, find the one with subjects
+                $semesterWithSubjects = DB::table('tbl_class_schedules')
+                    ->select('semester_id')
+                    ->groupBy('semester_id')
+                    ->orderBy('semester_id', 'desc')
+                    ->first();
+                
+                if ($semesterWithSubjects) {
+                    $activeSemester = Semester::find($semesterWithSubjects->semester_id);
+                }
+            }
+
+            $query = DB::table('tbl_class_schedules as cs')
+                ->leftJoin('tbl_users as u', 'cs.atl', '=', 'u.user_id')
+                ->leftJoin('tbl_profile as p', 'u.profile_id', '=', 'p.profile_id');
+
+            // Filter by semester if exists
+            if ($activeSemester) {
+                $query->where('cs.semester_id', $activeSemester->semester_id);
+            }
+
+            if ($search) {
+                $query->where(function($q) use ($search) {
+                    $q->where('cs.subject_code', 'LIKE', "%{$search}%")
+                      ->orWhere('cs.cat_no', 'LIKE', "%{$search}%")
+                      ->orWhere('cs.subject_title', 'LIKE', "%{$search}%")
+                      ->orWhere('cs.section', 'LIKE', "%{$search}%");
+                });
+            }
+
+            // Order by subject code
+            $query->orderBy('cs.subject_code', 'asc');
+
+            // Get total count before pagination
+            $totalCount = $query->count();
+
+            // Paginate results
+            $currentPage = (int) ($request->page ?? 1);
+            $offset = ($currentPage - 1) * $perPage;
+            
+            $subjects = $query->select(
+                'cs.schedId',
+                'cs.subject_code',
+                'cs.cat_no',
+                'cs.subject_title',
+                'cs.units',
+                'cs.date as day',
+                'cs.time',
+                'cs.room',
+                'cs.section',
+                'cs.slot_no',
+                DB::raw("CONCAT(COALESCE(p.fname, ''), ' ', COALESCE(p.lname, '')) as faculty")
+            )
+            ->offset($offset)
+            ->limit($perPage)
+            ->get();
+
+            // Calculate pagination meta
+            $lastPage = ceil($totalCount / $perPage);
+
+            return response()->json([
+                'success' => true,
+                'data' => $subjects,
+                'semester' => $activeSemester ? [
+                    'semester_id' => $activeSemester->semester_id,
+                    'semester_name' => $activeSemester->semester_name ?? null,
+                    'school_year' => $activeSemester->school_year ?? null,
+                ] : null,
+                'meta' => [
+                    'current_page' => $currentPage,
+                    'last_page' => $lastPage,
+                    'per_page' => (int) $perPage,
+                    'total' => $totalCount,
+                    'from' => $totalCount > 0 ? $offset + 1 : null,
+                    'to' => $totalCount > 0 ? min($offset + $perPage, $totalCount) : null,
+                ]
+            ], 200);
+
+        } catch (\Exception $e) {
+            \Log::error('Error fetching public subjects schedule: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetching subjects schedule',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Get subjects offered for a semester
      */
     public function getSubjectsOffered(Request $request)
