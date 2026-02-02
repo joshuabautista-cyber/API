@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Public routes (no auth required)
 Route::get('/subjects-schedule', [RegistrationController::class, 'getPublicSubjectsSchedule']);
+Route::get('/registration-form', [RegistrationController::class, 'getUserRegistrationForm']);
 
 // Pre-registration routes
 Route::prefix('prereg')->group(function () {

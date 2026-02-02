@@ -492,4 +492,73 @@ class RegistrationController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Get user's registration form data for a specific semester
+     * Shows enrolled courses with schedule details
+     */
+    public function getUserRegistrationForm(Request $request)
+    {
+        try {
+            $userId = $request->user_id;
+            $semesterId = $request->semester_id;
+
+            if (!$userId) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'User ID is required'
+                ], 400);
+            }
+
+            if (!$semesterId) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Semester ID is required'
+                ], 400);
+            }
+
+            \Log::info("Fetching registration form for user_id: {$userId}, semester_id: {$semesterId}");
+
+            // Get enrollments with class schedule details for the user and semester
+            $registrations = DB::table('tbl_enrollments as e')
+                ->leftJoin('tbl_class_schedules as cs', function($join) {
+                    $join->on('e.schedId', '=', 'cs.schedId');
+                })
+                ->leftJoin('tbl_preregistration as pr', 'e.prereg_id', '=', 'pr.prereg_id')
+                ->where('e.user_id', $userId)
+                ->where('e.semester_id', $semesterId)
+                ->select(
+                    'e.enrollment_id',
+                    'e.section',
+                    DB::raw('COALESCE(cs.cat_no, pr.subject_code, "TBA") as cat_no'),
+                    DB::raw('COALESCE(cs.date, "TBA") as day'),
+                    DB::raw('COALESCE(cs.time, "TBA") as time'),
+                    DB::raw('COALESCE(cs.room, "TBA") as room'),
+                    DB::raw('COALESCE(cs.units, pr.units, 0) as units'),
+                    DB::raw('COALESCE(e.section, cs.section, pr.section, "TBA") as section')
+                )
+                ->orderBy('e.enrollment_id', 'asc')
+                ->get();
+
+            // Calculate total units
+            $totalUnits = $registrations->sum('units');
+
+            \Log::info("Found " . count($registrations) . " registrations, total units: {$totalUnits}");
+
+            return response()->json([
+                'success' => true,
+                'data' => $registrations,
+                'total_units' => $totalUnits,
+                'count' => count($registrations)
+            ], 200);
+
+        } catch (\Exception $e) {
+            \Log::error('Error fetching user registration form: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Error fetching registration form',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
