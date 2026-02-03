@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2026 at 08:33 AM
+-- Generation Time: Feb 02, 2026 at 04:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -176,6 +176,151 @@ CREATE TABLE `sessions` (
   `payload` longtext NOT NULL,
   `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_applicant_profile`
+--
+
+CREATE TABLE `tbl_applicant_profile` (
+  `applicant_id` varchar(50) NOT NULL,
+  `user_id` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) NOT NULL,
+  `firstname` varchar(50) NOT NULL,
+  `middlename` varchar(50) NOT NULL,
+  `suffix` varchar(11) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `sex` varchar(5) DEFAULT NULL,
+  `religion_id` int(11) DEFAULT NULL,
+  `citizenship_id` varchar(20) DEFAULT NULL,
+  `multiple_citizenship_id` varchar(20) DEFAULT NULL,
+  `permanent_address` text DEFAULT NULL,
+  `permanent_cluster` text DEFAULT NULL,
+  `zipcode` varchar(50) DEFAULT NULL,
+  `clsu_zipcode` varchar(11) DEFAULT NULL,
+  `country` varchar(50) DEFAULT NULL,
+  `clsu_country` varchar(100) DEFAULT NULL,
+  `nationality` varchar(100) DEFAULT NULL,
+  `date_of_birth` varchar(50) DEFAULT NULL,
+  `place_of_birth` text DEFAULT NULL,
+  `course_program` varchar(100) DEFAULT NULL,
+  `gender` varchar(50) DEFAULT NULL,
+  `civil_status` varchar(50) DEFAULT NULL,
+  `student_tel_contact` varchar(20) DEFAULT NULL,
+  `student_mobile_contact` varchar(20) DEFAULT NULL,
+  `student_email` varchar(50) DEFAULT NULL,
+  `clsu_address` text DEFAULT NULL,
+  `clsu_cluster` text DEFAULT NULL,
+  `senior_high_address` text DEFAULT NULL,
+  `senior_high_cluster` text DEFAULT NULL,
+  `senior_high_year` varchar(30) DEFAULT NULL,
+  `type_of_school` varchar(50) DEFAULT NULL,
+  `high_school_average` float DEFAULT 0,
+  `high_school_grad_year` text DEFAULT NULL,
+  `senior_high_school_awards` varchar(50) DEFAULT NULL,
+  `father_fname` varchar(50) DEFAULT NULL,
+  `father_age` int(11) DEFAULT NULL,
+  `father_occupation` text DEFAULT NULL,
+  `father_education` varchar(100) DEFAULT NULL,
+  `mother_fname` varchar(50) DEFAULT NULL,
+  `mother_age` int(11) DEFAULT NULL,
+  `mother_occupation` text DEFAULT NULL,
+  `mother_education` text DEFAULT NULL,
+  `father_contact` varchar(50) DEFAULT NULL,
+  `mother_contact` varchar(50) DEFAULT NULL,
+  `father_address` text DEFAULT NULL,
+  `mother_address` text DEFAULT NULL,
+  `guardian_name` varchar(50) DEFAULT NULL,
+  `guardian_age` int(11) DEFAULT NULL,
+  `guardian_occupation` varchar(100) DEFAULT NULL,
+  `guardian_education` varchar(50) DEFAULT NULL,
+  `guardian_contact` varchar(20) DEFAULT NULL,
+  `guardian_address` text DEFAULT NULL,
+  `birth_order` text DEFAULT NULL,
+  `no_brother` int(11) DEFAULT NULL,
+  `no_sister` int(11) DEFAULT NULL,
+  `family_income` varchar(100) DEFAULT NULL,
+  `elementary_school_address` text DEFAULT NULL,
+  `elementary_year` text DEFAULT NULL,
+  `elem_awards` varchar(100) DEFAULT NULL,
+  `high_school_address` text DEFAULT NULL,
+  `high_school_year` text DEFAULT NULL,
+  `high_school_awards` varchar(50) DEFAULT NULL,
+  `vocational_school_address` text DEFAULT NULL,
+  `vocational_school_year` text DEFAULT NULL,
+  `vocational_awads` varchar(50) DEFAULT NULL,
+  `college_school_address` text DEFAULT NULL,
+  `college_school_year` text DEFAULT NULL,
+  `college_awards` varchar(50) DEFAULT NULL,
+  `extra_curricular` text DEFAULT NULL,
+  `emergency_person` varchar(50) DEFAULT NULL,
+  `emergency_relationship` varchar(50) DEFAULT NULL,
+  `emergency_contact` varchar(20) DEFAULT NULL,
+  `emergency_address` text DEFAULT NULL,
+  `clsu_cat` float DEFAULT NULL,
+  `scholarship` text DEFAULT NULL,
+  `program_id` int(11) DEFAULT NULL,
+  `activities` text DEFAULT NULL,
+  `indigenous` text DEFAULT NULL,
+  `indigenous_proof` text DEFAULT NULL,
+  `indigenous_type` text DEFAULT NULL,
+  `first_generation` varchar(10) DEFAULT NULL,
+  `disability` varchar(10) DEFAULT NULL,
+  `disability_type` text DEFAULT NULL,
+  `disability_proof` text DEFAULT NULL,
+  `family_doctor` varchar(50) DEFAULT NULL,
+  `family_doctor_contact` varchar(20) DEFAULT NULL,
+  `signatories` varchar(50) DEFAULT NULL,
+  `four_p` varchar(5) DEFAULT NULL,
+  `listahanan` varchar(5) DEFAULT NULL,
+  `strand` text DEFAULT NULL,
+  `parent_marriage_status` varchar(50) DEFAULT NULL,
+  `living_with_parent` text DEFAULT NULL,
+  `companions_at_home` text DEFAULT NULL,
+  `working_student` text DEFAULT NULL,
+  `guardian_relationship` text DEFAULT NULL,
+  `guardian_email` varchar(50) DEFAULT NULL,
+  `study_habit` varchar(5) DEFAULT NULL,
+  `study_habit_hours` text DEFAULT NULL,
+  `current_event` text DEFAULT NULL,
+  `reason_to_enroll` text DEFAULT NULL,
+  `personal_advocacy` text DEFAULT NULL,
+  `vision_health` varchar(50) DEFAULT NULL,
+  `allergy` text DEFAULT NULL,
+  `medicine_take` text DEFAULT NULL,
+  `mental_health` text DEFAULT NULL,
+  `guidance_councilor` varchar(10) DEFAULT NULL,
+  `visit_guidance_councilor` text DEFAULT NULL,
+  `guidance_councilor_assistance` text DEFAULT NULL,
+  `itr` text DEFAULT NULL,
+  `sibling_in_college` varchar(11) DEFAULT NULL,
+  `sibling_college_graduate` varchar(11) DEFAULT NULL,
+  `e_address` text DEFAULT NULL,
+  `h_address` text DEFAULT NULL,
+  `sh_address` text DEFAULT NULL,
+  `father_mname` varchar(50) NOT NULL,
+  `father_lname` varchar(50) NOT NULL,
+  `mother_mname` varchar(50) NOT NULL,
+  `mother_lname` varchar(50) NOT NULL,
+  `is_updated` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_applicant_profile`
+--
+
+INSERT INTO `tbl_applicant_profile` (`applicant_id`, `user_id`, `lastname`, `firstname`, `middlename`, `suffix`, `age`, `sex`, `religion_id`, `citizenship_id`, `multiple_citizenship_id`, `permanent_address`, `permanent_cluster`, `zipcode`, `clsu_zipcode`, `country`, `clsu_country`, `nationality`, `date_of_birth`, `place_of_birth`, `course_program`, `gender`, `civil_status`, `student_tel_contact`, `student_mobile_contact`, `student_email`, `clsu_address`, `clsu_cluster`, `senior_high_address`, `senior_high_cluster`, `senior_high_year`, `type_of_school`, `high_school_average`, `high_school_grad_year`, `senior_high_school_awards`, `father_fname`, `father_age`, `father_occupation`, `father_education`, `mother_fname`, `mother_age`, `mother_occupation`, `mother_education`, `father_contact`, `mother_contact`, `father_address`, `mother_address`, `guardian_name`, `guardian_age`, `guardian_occupation`, `guardian_education`, `guardian_contact`, `guardian_address`, `birth_order`, `no_brother`, `no_sister`, `family_income`, `elementary_school_address`, `elementary_year`, `elem_awards`, `high_school_address`, `high_school_year`, `high_school_awards`, `vocational_school_address`, `vocational_school_year`, `vocational_awads`, `college_school_address`, `college_school_year`, `college_awards`, `extra_curricular`, `emergency_person`, `emergency_relationship`, `emergency_contact`, `emergency_address`, `clsu_cat`, `scholarship`, `program_id`, `activities`, `indigenous`, `indigenous_proof`, `indigenous_type`, `first_generation`, `disability`, `disability_type`, `disability_proof`, `family_doctor`, `family_doctor_contact`, `signatories`, `four_p`, `listahanan`, `strand`, `parent_marriage_status`, `living_with_parent`, `companions_at_home`, `working_student`, `guardian_relationship`, `guardian_email`, `study_habit`, `study_habit_hours`, `current_event`, `reason_to_enroll`, `personal_advocacy`, `vision_health`, `allergy`, `medicine_take`, `mental_health`, `guidance_councilor`, `visit_guidance_councilor`, `guidance_councilor_assistance`, `itr`, `sibling_in_college`, `sibling_college_graduate`, `e_address`, `h_address`, `sh_address`, `father_mname`, `father_lname`, `mother_mname`, `mother_lname`, `is_updated`) VALUES
+('25-0001', '25-0001', 'JOSE', 'FREDDIE', 'MARZAN', 'Jr.', 18, 'M', 18, 'FIL', '', 'CAMINDOROAN|ZONE 6', 'Region I|Pangasinan|San Nicolas|', '2447', '3119', 'Philippines', 'Philippines ', 'Filipino', '2006-11-19', 'Brgy. Camindoroan San Nicolas, Pangasinan', '(DVM) DOCTOR OF VETERINARY MEDICINE (DVM)', 'straight', 'single', '', '09267506611', 'josefreddie111@gmail.com', 'Bagong sikat', 'Region III|Nueva Ecija|Science City of Muñoz|', 'RED ARROW HIGH SCHOOL', 'REGION I|PANGASINAN|SAN NICOLAS', '2024-2025', 'private non-sectarian', 0, '2019-2025', 'WITH HIGH HONORS', 'Freddie', 41, 'Self-Employed', 'not_college_graduate', 'May Joanna', 41, 'Self-Employed', 'not_college_graduate', '09959200196', '09959200196', 'Brgy. Camindoroan San Nicolas, Pangasinan', 'Brgy. Camindoroan San Nicolas, Pangasinan', 'Jose, Freddie L.', 41, 'Private Employee', 'High School Level', '09959200196', 'Brgy. Camindoroan San Nicolas, Pangasinan', 'Youngest', 1, 1, '0 to 131484', 'CAMINDOROAN ELEMENTARY SCHOOL', '2013-2019', 'CLASS VALEDICTORIAN', 'RED ARROW HIGH SCHOOL', '2019-2025', 'WITH HIGH HONORS', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Student Body Government - President', 'May Joanna F.', 'mother', '09959200196', 'Brgy. Camindoroan San Nicolas, Pangasinan', 0, 'DOST SEI', NULL, '', 'no', NULL, NULL, 'no', 'no', NULL, NULL, '', '', 'guardian,', 'yes', 'no', 'Academic Track (Science, Technology, Engineering and Mathematics (STEM) Strand)', 'Living Together', 'yes', 'Siblings,', 'no', 'Father', 'jmayjoanna1984@gmail.com', 'yes', '30 min - 1 hour', 'Social Media', 'I enrolled at CLSU for this very particular reason that it has the program that I want which is the DVM. Not only that, but also because of CLSU\'s strong reputation that has consistently produced top-performing veterinarians, and I want to be trained by experts in the field. ', NULL, 'none', 'no', 'no', 'no', 'maybe', 'I will come voluntary to consult our guidance counselor', 'To be assisted regarding to my personal problems like how to deal with academic stress, peer pressure, and self-isolation, I would like to hear some advice from the guidance counselor in staying motivated especially during challenging times in vet school.', '25-0001_itr_proof.microsoft', 'yes', 'yes', 'Camindoroan, San Nicolas, Pangasinan', 'Poblacion West, San Nicolas, Pangasinan', 'Poblacion West, San Nicolas, Pangasinan', 'L', 'Jose', 'M', 'Jose', 1),
+('25-0002', '25-0002', 'SANTOS', 'VEA JESLYN', 'URMATAN', '', 17, 'F', 14, 'FIL', '', 'Block 5 Lot 10 Paradise Subd., Brgy. Bangad, Cabanatuan City', 'Region III|Nueva Ecija|City of Cabanatuan|', '3100', '3100', 'Philippines ', 'Philippines', 'Filipino', '2007-10-25', 'Cabanatuan City', '(DVM) DOCTOR OF VETERINARY MEDICINE (DVM)', 'straight', 'Single', '', '09761512311', 'veajeslyn.santos@gmail.com', 'Brgy. Bagong Sikat', 'Region III|Nueva Ecija|Science City of Muñoz|', 'Honorato C. Perez Sr. Memorial Science High School', 'REGION III|NUEVA ECIJA|CABANATUAN CITY', '2023-2025', 'public', 0, '2019-2023', 'WITH HONORS', 'Ronnie', 51, 'Government Employee', 'college_graduate', 'Lotis Divina', 46, 'Government Employee', 'college_graduate', '09232303397', '09420186706', 'Block 5 Lot 10 Paradise Subdivision, Bangad, Cabanatuan City', 'Block 5 Lot 10 Paradise Subdivision, Bangad, Cabanatuan City', 'Santos, Lotis Divina U.', 46, 'Private Employee', 'College Graduate', '09420186706', 'Block 5 Lot 10 Paradise Subdivision, Bangad, Cabanatuan City', '1st', 0, 1, '525937 to 920388', 'Saint Louis Anne Montessori High School and Colleges, Bangad Cabanatuan City', '2012-2019', 'With Honors', 'Honorato C. Perez Sr. Memorial Science High School', '2019-2023', 'With Honors', 'N/A', '', '', 'N/A', '', '', '', 'Santos, Lotis Divina U.', 'mother', '09420186706', 'Block 5 Lot 10 Paradise Subdivision, Bangad, Cabanatuan City', 0, '', NULL, '', 'no', NULL, NULL, 'yes', 'no', NULL, NULL, '', '', 'mother,', 'no', 'no', 'Academic Track (Science, Technology, Engineering and Mathematics (STEM) Strand)', 'Living Together', 'yes', 'Siblings,', 'no', 'Mother', 'lotisdivina6@gmail.com', 'yes', 'more than an hour - 2 hours', 'Social Media', 'Because it has the program DVM.', NULL, 'astigmatism', 'no', 'no', 'no', 'no', 'I will come voluntary to consult our guidance counselor', '', NULL, 'no', 'no', 'Brgy. Bangad, Cabanatuan City', 'Mabini Extension, Cabanatuan City', 'Mabini Extension, Cabanatuan City', 'B', 'Santos', 'U', 'Santos', 1),
+('25-0003', '25-0003', 'Rodriguez', 'Elisa Jean', 'Dulatre', '', 18, 'F', 3, 'FIL', '', 'Rodriguez Farm, Duale', 'Region III|Bataan|Limay|', '2103', '3119', 'Philippines', 'Philippines', 'Filipino', '2006-10-22', 'Balanga City, Bataan', '(DVM) DOCTOR OF VETERINARY MEDICINE (DVM)', 'straight', 'single', '', '0938 580 0821', 'elisajeanrodriguez06@gmail.com', '#49 Purok Maginhawa, Brgy. Bagong Sikat', 'Region III|Nueva Ecija|Science City of Muñoz|', 'Bataan National High School - Senior High School ', 'REGION III|BATAAN|LIMAY', '2025', 'public', 0, '2019-2020; 2020-2023', 'High Honor, 3rd Place in Wikalaya ', 'Jose III', 51, 'Self-Employed', 'college_graduate', 'Mary Jane', 51, 'Self-Employed', 'college_graduate', '0966 800 7183', '0977 019 8937', 'Rodriguez Farm, Duale, Limay, Bataan', 'Rodriguez Farm, Duale, Limay, Bataan', 'Rodriguez, Mary Jane D.', 51, 'Non-Employed', 'College Graduate', '0977 019 8937', 'Rodriguez Farm, Duale, Limay, Bataan ', '3rd', 1, 1, '0 to 131484', 'The Peninsula School Inc.', '2013-2019', 'Silver Medalist, 2nd Place in Editorial Writing - Filipino (DSPC), 1st Place in Editorial Writing - ', 'The Peninsula School Inc.; Bataan National High School', '2019-2020; 2020-2023', 'Highest Honor, 2nd Place in STEMTOKPERIMENT, 6th P', 'N/A', '', '', 'N/A', '', '', 'The Green Plume, Ang Luntiang Panitikan, Young Masters of Communication, Young Schemers Club, Values Education Society, HIRAYA (SSG), Ang Banaag, Math Enthusiasts Club, Mathletes Society, Antikytheria, The Premier, Ang Talaghay, The House of Arts, Solus Christus', 'Rodriguez, Mary Jane D.', 'mother', '0977 019 8937', 'Rodriguez Farm, Duale, Limay, Bataan', 0, 'DOST SEI Scholarship (still waiting for results)', NULL, '', 'no', NULL, NULL, 'no', 'no', NULL, NULL, '', '', 'mother,', 'no', 'no', 'Academic Track (Science, Technology, Engineering and Mathematics (STEM) Strand)', 'Living Together', 'yes', 'Grandparents,', 'no', 'Mother', 'mjdrodrigue.04@gmail.com', 'yes', 'more than 2 hours', 'online news and articles', 'It is one of the best universities that offer my chosen course. ', NULL, 'none', 'no', 'no', 'no', 'no', 'I will come voluntary to consult our guidance counselor', 'N/A', '25-0003_itr_proof.jfif', 'no', 'yes', 'PBR Compound, Limay, Bataan', 'PBR Compound, Limay, Bataan; Roman Superhighway, Bagong Silang, Balanga City, Bataan', 'Roman Superhighway, Bagong Silang, Balanga City, Bataan', 'Q', 'Rodriguez', 'D', 'Rodriguez', 1),
+('25-0004', '25-0004', 'ROBISO', 'JOSHUA', 'PANGILINAN', '', NULL, 'M', 18, NULL, NULL, '#587, Purok 6, Valle Cruz', 'Region III|Nueva Ecija|City of Cabanatuan|', '3100', '3120', 'Philippines', 'Philippines', 'Filipino', '2006-12-30', 'Cabanatuan City', '(DVM) DOCTOR OF VETERINARY MEDICINE (DVM)', 'not_to_say', 'Single', NULL, '09975911022', 'tsukashua@gmail.com', '219 Matulungin St., Bagong Sikat', 'Region III|Nueva Ecija|Science City of Muñoz|', 'Honorato C. Perez Sr. Memorial Science High School', NULL, '2025', NULL, 0, NULL, NULL, 'Julito', NULL, 'Tricycle Driver', 'not_college_graduate', 'Eunice Fermina', NULL, 'Tricycle Driver', 'college_graduate', '', '09058978982', NULL, NULL, 'Robiso, Eunice Fermina P.', NULL, NULL, NULL, '09058978982', NULL, '4th', NULL, NULL, '0 to 131484', 'Valle Cruz Elementary School', '2019', NULL, 'Honorato C. Perez Sr. Memorial Science High School', '2023', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Eunice Fermina P. Robiso', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'no', NULL, NULL, NULL, 'no', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '25-0004_itr_proof.jpg', 'no', 'yes', 'Valle Cruz, Cabanatuan City', 'Mabini Extension, Cabanatuan City', 'Mabini Extension, Cabanatuan City', 'P.', 'Robiso', 'P.', 'Robiso', 1),
+('25-0005', '25-0005', 'GERONIMO', 'MARYFRAN CHYANEA', 'ITLIONG', '', 18, 'F', 18, 'FIL', '', 'Tagilid Street, Santo Tomas', 'Region III|Nueva Ecija|Peñaranda|', '3103', '3119', 'Philippines', 'Philippines', 'Filipino', '2007-01-04', 'Peñaranda, Nueva Ecija', '(BSPSYCH) BACHELOR OF SCIENCE IN PSYCHOLOGY (BSPSYCH)', 'straight', 'Single', '', '09922886674', 'geronimomaryfranchyanea@gmail.com', 'Juls Residences, Maginhawa, Bagong Sikat', 'Region III|Nueva Ecija|Science City of Muñoz|', 'Divina Pastora College', 'REGION III|NUEVA ECIJA|PEÑARANDA', '2025', 'private sectarian', 0, '2019-2023', 'With Highest Honors', 'Francisco', 41, 'Government Employee (Junior High School Teacher)', 'college_graduate', 'Maria Carmela', 36, 'Government Employee (Junior High School Teacher)', 'college_graduate', '09913222687', '09913222685', 'Santo Tomas, Peñaranda, Nueva Ecija', 'Santo Tomas, Peñaranda, Nueva Ecija', 'Geronimo, Francisco S., Jr.', 41, 'Government Employee', 'Masters Level', '09913222687', 'Tagilid Road, Luis Maningas Street, Santo Tomas, Peñaranda, Nueva Ecija', 'Only Child', 0, 1, '525937 to 920388', 'Sto. Tomas Elementary School', '2019', 'First Honorable Mention', 'Peñaranda National High School', '2023', 'With High Honors', 'N/A', '', '', 'N/A', '', '', 'Campus Journalism; Student Government; Dance Groups', 'Geronimo, Francisco S., Jr.', 'father', '0991 322 2687', 'Tagilid Road, Luis Maningas Street, Santo Tomas, Peñaranda, Nueva Ecija', 0, '', NULL, '', 'no', NULL, NULL, 'no', 'no', NULL, NULL, '', '', 'father,', 'no', 'no', 'Academic Track (Humanities and Social Sciences Strand (HUMSS))', 'Living Together', 'yes', 'Family', 'no', 'Father', 'francis050282@gmail.com', 'yes', 'more than an hour - 2 hours', 'Social Media', 'It offers the course I want and has an ideal environment', NULL, 'near-sighted', 'no', 'no', 'no', 'yes', 'The guidance counselor will send me an invitation during our free time', 'By giving advice and listening', NULL, 'no', 'no', 'Peñaranda, Nueva Ecija', 'Peñaranda, Nueva Ecija', 'Gapan City, Nueva Ecija', 'Sarabia', 'Geronimo Jr.', 'Itliong', 'Geronimo', 1),
+('25-0006', '25-0006', 'DE LEON', 'KYLIE CHARLIZE', 'VILLANUEVA', '', 18, 'F', 18, 'FIL', 'FIL', 'MABINI|Purok 1', 'Region III|Nueva Ecija|Santo Domingo|', '3133', '3133', 'Philippines', 'Philippines', 'Filipino', '2007-01-10', 'Brgy. Joson, Dig-Dig Carangalan, Nueva Ecija', '(BSPSYCH) BACHELOR OF SCIENCE IN PSYCHOLOGY (BSPSYCH)', 'straight', 'single', '', '09153492005', 'deleonkylie08@gmail.com', 'MABINI|Purok 1', 'Region III|Nueva Ecija|Santo Domingo|', 'San Sebastian School, Inc.', 'REGION III|NUEVA ECIJA|SANTO DOMINGO', '2024-2025', 'private sectarian', 0, '2019-2022', 'Service Awardee  and With Honor', 'Carlo', 46, 'Government Employee', 'not_college_graduate', 'Melanie', 41, 'Government Employee', 'not_college_graduate', '09270823936', '09454984914', 'Purok 1, Brgy. Mabini, Sto. Domingo, Nueva Ecija ', 'Purok 1, Brgy. Mabini, Sto. Domingo, Nueva Ecija ', 'De Leon, Melanie V.', 41, 'Government Employee', 'College Level', '09454984914', 'Purok 1, Brgy. Mabini, Sto. Domingo, Nueva Ecija ', 'Middle Child', 1, 1, '', 'Maligaya Integrated School', '2012-2019', 'Leadership Awardee, With Honors', 'San Sebastian School, Inc.', '2019-2022', 'With Honors, Service Awardee', 'N/A', '', '', '', '', '', '', 'De Leon, Melanie V.', 'mother', '09454984914', 'Purok 1, Brgy. Mabini, Sto. Domingo, Nueva Ecija', 0, '', NULL, '', 'no', NULL, NULL, 'no', 'no', NULL, NULL, '', '', 'guardian,', 'no', 'no', 'Academic Track (Science, Technology, Engineering and Mathematics (STEM) Strand)', 'Living Together', 'yes', 'Siblings,', 'no', 'Mother', 'N/A', 'yes', '30 min - 1 hour', 'Televsion,', 'because the course i like is here', NULL, 'none', 'no', 'no', 'no', 'no', ' The My college guidance coordinator will refer me to consult our guidance counselor', '', NULL, 'yes', 'no', 'Maligaya Science City of Munoz Nueva Ecija', 'T. Delos Santos St. Science City Munoz Nueva Ecija', 'T. Delos Santos St. Science City Munoz Nueva Ecija', 'M.', 'De Leon', 'V. ', 'De Leon', 1),
+('25-0007', '25-0007', 'DAYAO', 'KAINEE', 'AGUSTIN', '', 18, 'F', 18, 'FIL', '', 'CAUDILLO|#45, Purok 2', 'Region III|Nueva Ecija|City of Cabanatuan|', '3100', '3119', 'Philippines ', 'Philippines ', 'Filipino ', '2006-11-18', 'M.V Gallego General Hospital ', '(BSPSYCH) BACHELOR OF SCIENCE IN PSYCHOLOGY (BSPSYCH)', 'straight', 'Single', '', '09666513701', 'dayaokainee@gmail.com', 'Bagong Sikat', 'Region III|Nueva Ecija|Science City of Muñoz|', 'Marciano del Rosario Memorial National High School ', 'REGION III|NUEVA ECIJA|CABANATUAN CITY', '2025', 'public', 0, '2019-2023', 'With Highest Honors', 'Benito', 46, 'Self-Employed', 'college_graduate', 'Melisa', 46, 'Self-Employed', 'college_graduate', '09673874097', '09673874097', 'Caudillo, Cabanatuan City', 'Caudillo, Cabanatuan City', 'Dayao, Melisa A.', 46, 'Government Employee', 'College Graduate', '09673874097', 'Caudillo, Cabanatuan City', 'Middle Child', 1, 1, '', 'Samon EMarciano del Rosario Memorial Elementary School', '2019', 'With Honors', 'Marciano del Rosario Memorial National High School', '2023', 'With Honors and With High Honors', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'N/A', 'Girl Scouting and Journalism ', 'Dayao, Benito G.', 'father', '09673874097', 'Caudillo, Cabanatuan City', 0, '', NULL, '', 'no', NULL, NULL, 'no', 'no', NULL, NULL, '', '', 'father,', 'no', 'no', 'Academic Track (Science, Technology, Engineering and Mathematics (STEM) Strand)', 'Living Together', 'yes', 'Siblings,', 'no', 'Mother', 'melisa.dayao@deped.gov.ph', 'yes', '30 min - 1 hour', 'Social Media', 'I  enrolled in CLSU because it is my sister\'s alma mater, and I wanted to follow in her footsteps. The university offers excellent facilities and a high standard of education, which attracted me. Additionally, being a state university, it provides a solid, affordable education with strong academic support.', NULL, 'wearing eyeglasses', 'no', 'no', 'no', 'no', 'I will come voluntary to consult our guidance counselor', 'I would like the guidance counselor to help me with career planning and provide advice on balancing academic responsibilities. Additionally, I’d appreciate support in addressing any personal challenges that may impact my studies.', NULL, 'no', 'yes', ' Pamaldan Cabanatuan City', 'Pamaldan Cabanatuan City', 'Pamaldan, Cabanatuan City ', 'G.', 'Dayao', 'A.', 'Dayao', 1),
+('25-0008', '25-0008', 'GABRIEL', 'REIGN ESTHER', 'BALOSBALOS', '', 18, 'F', 4, 'FIL', '', '0633 Victoria Mansion, Bitas ', 'Region III|Nueva Ecija|City of Cabanatuan|', '3100', '3119', 'Philippines', 'Philippines', 'Filipino', '2007-04-26', 'Science City of Muñoz, Nueva Ecija ', '(BSPSYCH) BACHELOR OF SCIENCE IN PSYCHOLOGY (BSPSYCH)', 'straight', 'Single', '', '09561603902', 'gabrielreignesther26@gmail.com', 'Brgy. Poblacion North , Science City of Muñoz ', 'Region III|Nueva Ecija|Science City of Muñoz|', 'Munoz National HighSchool-Main (Senior High)', 'REGION III|NUEVA ECIJA|CABANATUAN CITY', '2023-2025', 'public', 0, '2019-2023', 'With Honors', 'Gabriel ', 51, 'Teaching', 'college_graduate', 'Roma ', 46, 'None', 'college_graduate', '09950983560', '09770025394', '0633 Victoria Mansion, Bitas, Cabanatuan City ', '0633 Victoria Mansion, Bitas, Cabanatuan City ', 'Balosbalos, Roma, C.', 46, 'Self-Employed', 'College Graduate', '09770025394', '0633 Victoria Mansion, Bitas, Cabanatuan City ', 'Middle Child', 3, 0, '262968 to 525936', 'DepEd CLSU Elementary (Laboratory) School', '2014-2019', 'With Honors', 'Munoz National HighSchool-Main (Junior High)', '2019-2023', 'With Honors', '', '', '', '', '', '', '', 'Balosbalos, Roma, C.', 'mother', '09770025394', '0633 Victoria Mansion, Bitas, Cabanatuan City ', 0, '', NULL, '', 'no', NULL, NULL, 'no', 'no', NULL, NULL, '', '', 'mother,', 'no', 'no', 'Academic Track (Science, Technology, Engineering and Mathematics (STEM) Strand)', 'Living Together', 'yes', 'Siblings,Stepfather,Relatives,', 'no', 'Mother', 'balosbalosroma@yahoo.com', 'yes', '30 min - 1 hour', 'Social Media', 'It is my dream school ever since', NULL, 'none', 'no', 'no', 'no', 'maybe', 'I will come voluntary to consult our guidance counselor', '', '25-0008_itr_proof.png', 'yes', 'yes', 'CLSU, Bantug, Science City of Muñoz ', 'Bantug, Science City of Muñoz ', 'Bantug, Science City of Muñoz ', 'Romulo', 'S.', 'C. ', 'Balosbalos', 1),
+('25-0009', '25-0009', 'BERNARDINO', 'LIANNE', 'GANTE', '', 18, 'F', 15, 'FIL', '', '337 Purok Pasong Tirad, Del Pilar East', 'Region III|Nueva Ecija|Zaragoza|', '3110', '3121', 'Philippines', 'Philippines', 'Filipino', '2007-03-06', 'Cabanatuan City', '(DVM) DOCTOR OF VETERINARY MEDICINE (DVM)', 'straight', 'single', '', '09707114314', 'lilicherry36@gmail.com', 'Zone 1, Licaong', 'Region III|Nueva Ecija|San Jose City|', 'Zaragoza National High School & San Rafael, Zaragoza, Nueva Ecija', 'REGION III|NUEVA ECIJA|ZARAGOZA', '2023-2025', 'public', 0, '2019 - 2023', 'Philippine Senate Gold Medal Award for Academic Ex', 'Ian', 41, 'None', 'not_college_graduate', 'Analy', 41, 'None', 'college_graduate', '09231356862', '09461048936', '337 Purok Pasong Tirad, Del Pilar East, Zaragoza, Nueva Ecija', '337 Purok Pasong Tirad, Del Pilar East, Zaragoza, Nueva Ecija', 'Bernardino, Analy G.', 41, 'Self-Employed', 'College Graduate', '09461048936', '337 Purok Pasong Tirad, Del Pilar East, Zaragoza, Nueva Ecija', 'Eldest', 1, 0, '0 to 131484', 'Zaragoza Central School & San Rafael, Zaragoza, Nueva Ecija', '2013 - 2019', 'Valedictorian', 'Zaragoza National High School & San Rafael, Zaragoza, Nueva Ecija', '2019 - 2023', 'Valedictorian', '', '', '', '', '', '', 'Organizations and journalism', 'Bernardino, Ian P.', 'father', '09231356862', '337 Purok Pasong Tirad, Del Pilar East, Zaragoza, Nueva Ecija', 0, '', NULL, '', 'no', NULL, NULL, 'yes', 'no', NULL, NULL, '', '', 'mother,', 'no', 'no', 'Academic Track (Science, Technology, Engineering and Mathematics (STEM) Strand)', 'Living Together', 'yes', 'Siblings,', 'no', 'Mother', 'ylanagante@gmail.com', 'yes', 'more than 2 hours', 'Cellphone/Laptop', 'This university is one of the top school that rank 2 in veterinary medicine which is what I wanted to pursue.', NULL, 'none', 'yes', 'no', 'no', 'yes', 'I will come voluntary to consult our guidance counselor', '', '25-0009_itr_proof.pdf', 'no', 'no', 'San Vicente, Zaragoza, Nueva Ecija', 'San Rafael, Zaragoza, Nueva Ecija', 'San Rafael, Zaragoza, Nueva Ecija', 'P', 'Bernardino', 'G.', 'Bernardino', 1),
+('25-14905', '25-0004', 'ROBISO', 'JOSHUA', 'PANGILINAN', NULL, 18, 'M', 18, 'FIL', '', '#587, Purok 6, Valle Cruz', 'Region III|Nueva Ecija|City of Cabanatuan|', '3100', '3120', 'Philippines', 'Philippines', 'Filipino', '2006-12-30', 'Cabanatuan City', 'Bachelor of Science in Psychology (BSPSYCH)', 'not_to_say', 'Single', '', '09975911022', 'tsukashua@gmail.com', '219 Matulungin St., Bagong Sikat', 'Region III|Nueva Ecija|Science City of Muñoz|', 'Honorato C. Perez Sr. Memorial Science High School', 'REGION III|NUEVA ECIJA|CABANATUAN CITY', '2025', 'public', 0, '2022-2023', 'With Honors, Award for Outstanding Performance in ', 'Julito', 56, 'Tricycle Driver', 'not_college_graduate', 'Eunice Fermina', 51, 'Tricycle Driver', 'college_graduate', '', '09058978982', '#587, Purok 6, Valle Cruz, Cabanatuan City, Nueva Ecija', '#587, Purok 6, Valle Cruz, Cabanatuan City, Nueva Ecija', 'Robiso, Eunice Fermina P.', 51, 'Self-Employed', 'College Graduate', '09058978982', '#587, Purok 6, Valle Cruz, Cabanatuan City, Nueva Ecija', '4th', 1, 2, '0 to 131484', 'Valle Cruz Elementary School', '2019', 'With Honors, Conduct Awardee, Best in Science, 2nd Place District Science Quiz Bee, 3rd Place CDSPC ', 'Honorato C. Perez Sr. Memorial Science High School', '2023', 'With Honors', 'N/A', '', '', 'N/A', '', '', 'Dancing', 'Eunice Fermina P. Robiso', 'mother', '09058978982', '#587, Purok 6, Valle Cruz, Cabanatuan City, Nueva Ecija', 0, '', NULL, '', 'no', NULL, NULL, 'no', 'no', NULL, NULL, '', '', 'mother,', 'no', 'no', 'Academic Track (Science, Technology, Engineering and Mathematics (STEM) Strand)', 'Living Together', 'yes', 'Siblings,', 'no', 'Mother', 'robisoeunicefermina@gmail.com', 'yes', 'more than an hour - 2 hours', 'Social Media', 'CLSU is my dream university.', NULL, 'none', 'no', 'no', 'no', 'no', 'I will come voluntary to consult our guidance counselor', '', '25-0004_itr_proof.jpg', 'no', 'yes', 'Valle Cruz, Cabanatuan City', 'Mabini Extension, Cabanatuan City', 'Mabini Extension, Cabanatuan City', 'P.', 'Robiso', 'P.', 'Robiso', 1);
 
 -- --------------------------------------------------------
 
@@ -2344,9 +2489,7 @@ INSERT INTO `tbl_enrollments` (`enrollment_id`, `prereg_id`, `user_id`, `semeste
 (999, NULL, 399, 11, 4, 'CE-400-A', NULL, 'pending', NULL, NULL, NULL, 0, '2026-01-05 23:31:02', '2026-01-05 23:31:02'),
 (1000, NULL, 400, 11, 10, 'PSYCH-200-C', NULL, 'pending', NULL, NULL, NULL, 0, '2026-01-05 23:31:02', '2026-01-05 23:31:02'),
 (1005, 2, 1033, 11, 7, 'ACCT-200-D', 739, 'pending', NULL, NULL, NULL, 0, '2026-01-28 22:38:19', '2026-01-28 22:38:19'),
-(1006, 1, 1033, 11, 7, 'ACCT-100-D', 7, 'pending', NULL, NULL, NULL, 0, '2026-01-28 22:38:36', '2026-01-28 22:38:36'),
-(1007, 3, 1033, 11, 7, 'ACCT-300-D', 607, 'pending', NULL, NULL, NULL, 0, '2026-01-28 22:38:40', '2026-01-28 22:38:40'),
-(1008, 4, 1033, 11, 7, 'ACCT-100-D', 775, 'pending', NULL, NULL, NULL, 0, '2026-01-28 22:41:49', '2026-01-28 22:41:49');
+(1006, 1, 1033, 11, 7, 'ACCT-100-D', 7, 'pending', NULL, NULL, NULL, 0, '2026-01-28 22:38:36', '2026-01-28 22:38:36');
 
 -- --------------------------------------------------------
 
@@ -3421,8 +3564,8 @@ CREATE TABLE `tbl_preregistration` (
 INSERT INTO `tbl_preregistration` (`prereg_id`, `user_id`, `semester_id`, `course_id`, `schedId`, `section`, `subject_code`, `subject_title`, `units`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1033, 11, 7, 7, 'ACCT-100-D', 'ACCT100', 'ACCT Course 100', 3, 'enrolled', '2026-01-27 19:45:03', '2026-01-28 22:38:36'),
 (2, 1033, 11, 7, 739, 'ACCT-200-D', 'ACCT200', 'ACCT Course 200', 3, 'enrolled', '2026-01-27 19:45:03', '2026-01-28 22:38:19'),
-(3, 1033, 11, 7, 607, 'ACCT-300-D', 'ACCT300', 'ACCT Course 300', 3, 'enrolled', '2026-01-27 19:45:03', '2026-01-28 22:38:40'),
-(4, 1033, 11, 7, 775, 'ACCT-100-D', 'ACCT100', 'ACCT Course 100', 3, 'enrolled', '2026-01-28 22:41:05', '2026-01-28 22:41:49');
+(3, 1033, 11, 7, 607, 'ACCT-300-D', 'ACCT300', 'ACCT Course 300', 3, 'pending', '2026-01-27 19:45:03', '2026-01-28 23:35:05'),
+(4, 1033, 11, 7, 775, 'ACCT-100-D', 'ACCT100', 'ACCT Course 100', 3, 'pending', '2026-01-28 22:41:05', '2026-01-28 23:35:00');
 
 -- --------------------------------------------------------
 
@@ -7692,6 +7835,13 @@ ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `sessions_user_id_index` (`user_id`),
   ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `tbl_applicant_profile`
+--
+ALTER TABLE `tbl_applicant_profile`
+  ADD PRIMARY KEY (`applicant_id`),
+  ADD KEY `applicantUserid` (`applicant_id`,`user_id`);
 
 --
 -- Indexes for table `tbl_class_schedules`

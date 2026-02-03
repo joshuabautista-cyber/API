@@ -16,6 +16,7 @@ use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\GradesController;
 use App\Http\Controllers\PreregistrationController;
+use App\Http\Controllers\ApplicantProfileController;
 
 
 Route::get('/user', function (Request $request) {
@@ -61,4 +62,14 @@ Route::apiResource('enrollments', EnrollmentController::class);
 Route::apiResource('grades', GradesController::class);
 Route::apiResource('registrations', RegistrationController::class);
 Route::apiResource('preregistrations', PreregistrationController::class);
+
+// Applicant Profile routes
+Route::prefix('applicant-profile')->group(function () {
+    Route::get('/', [ApplicantProfileController::class, 'index']);
+    Route::get('/user/{userId}', [ApplicantProfileController::class, 'show']);
+    Route::get('/{applicantId}', [ApplicantProfileController::class, 'getByApplicantId']);
+    Route::post('/', [ApplicantProfileController::class, 'store']);
+    Route::put('/user/{userId}', [ApplicantProfileController::class, 'update']);
+    Route::delete('/user/{userId}', [ApplicantProfileController::class, 'destroy']);
+});
 
